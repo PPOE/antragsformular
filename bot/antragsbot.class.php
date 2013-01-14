@@ -13,7 +13,7 @@ class AntragsBot {
       $this->template = $template;
       $this->bot = new Wikimate(APIURL);
 
-      $this->bot->debugMode(true);
+      $this->bot->setDebugMode(true);
 
    }
 
