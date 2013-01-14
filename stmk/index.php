@@ -22,7 +22,7 @@
 			// DO THE BOT MAGIC!
 
 			
-			$bot = new AntragsBot("Benutzer:AntragsBot/Test", "Vorlage:Stmk/AntragLV");
+			$bot = new AntragsBot("Benutzer:AntragsBot/Test", file_get_contents("template.txt"));
 
 			
 

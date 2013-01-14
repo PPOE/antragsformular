@@ -1,0 +1,8 @@
+{{Vorlage:Stmk/AntragLV
+| titel = %%titel%%
+| bereich = %%bereich%%
+| antragsteller = %%antragsteller%%
+| antragsforderung = %%antragsforderung%%
+| antragsbegruendung = %%antragsbegruendung%%
+| zeitpunkt = %%zeitpunkt%%
+}}
