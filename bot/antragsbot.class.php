@@ -23,7 +23,7 @@ class AntragsBot {
   						'rvprop' => "content",
   						'intoken' => "edit");
   		print_r ( $this->bot->query($params) );
-  		$oldPage = array_values(
+  		/*$oldPage = array_values(
 					  			array_values(
 					  				array_values(
 					  					array_values(
@@ -47,7 +47,7 @@ class AntragsBot {
   						'summary' => urlencode("Neuer Antrag via Formular"),
   						'text' => urlencode($newPage)
   						);
-  		print_r ( $this->bot->edit($params3) );
+  		print_r ( $this->bot->edit($params3) );*/
   	}
 }
 
