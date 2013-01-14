@@ -1,6 +1,7 @@
 <?php
-	require_once('mediawikibot.class.php');
 	require_once('config.php');
+	require_once('../Wikimate/globals.php');
+	
 
 class AntragsBot {
 	private $target;
@@ -8,46 +9,41 @@ class AntragsBot {
 	private $bot;
 
 	public function __construct($target, $template) {
-      $this->target = urlencode($target);
+      $this->target = $target;
       $this->template = $template;
-      $this->bot = new MediaWikiBot();
+      $this->bot = new Wikimate(APIURL);
    }
 
   	public function post($data) {
   		
-  		print_r ( $this->bot->login() );
+  		try
+		{
+		    if ($this->bot->login(USERNAME,PASSWORD))
+		        echo 'user logged in .' ;
+		    else {
+		        $error = $this->bot->getError();
+		        print_r($error);
+		    }
 
-  		$params = array('titles' => $this->target,
-  						'bot' => "true",
-  						'prop' => "info|revisions",
-  						'rvprop' => "content",
-  						'intoken' => "edit");
-  		print_r ( $this->bot->query($params) );
-  		/*$oldPage = array_values(
-					  			array_values(
-					  				array_values(
-					  					array_values(
-					  						
-					  							$this->bot->query($params))[0])[0])[0])[3][0];
+		    $page = $this->bot->getPage($this->target);
+		    $oldPage = $page->getText();
 
-  		$antrag = $this->template;
+		    $antrag = $this->template;
 
-  		foreach ($data as $key => $value) {
-  			$antrag = str_replace("%%".$key."%%", $value, $antrag);
-  		}
+	  		foreach ($data as $key => $value) {
+	  			$antrag = str_replace("%%".$key."%%", $value, $antrag);
+	  		}
 
-  		$antrag .= "\n\n<!--%%NEW%%-->\n";
+	  		$antrag .= "\n\n<!--%%NEW%%-->\n";
 
-  		$newPage = str_replace("<!--%%NEW%%-->", $antrag, $oldPage);
+	  		$newPage = str_replace("<!--%%NEW%%-->", $antrag, $oldPage);
 
-  		// push $new to wiki
-  		$params3 = array('title' => $this->target,
-  						'bot' => "true",
-  						'section' => "0",
-  						'summary' => urlencode("Neuer Antrag via Formular"),
-  						'text' => urlencode($newPage)
-  						);
-  		print_r ( $this->bot->edit($params3) );*/
+	  		return $page->setText($newPage);
+		}
+		catch ( Exception $e )
+		{
+		    echo "An error occured: ".$e->getMessage(); // returns true if the edit worked
+		}
   	}
 }
 
