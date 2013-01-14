@@ -8,27 +8,46 @@ class AntragsBot {
 	private $bot;
 
 	public function __construct($target, $template) {
-      $this->target = $target;
+      $this->target = urlencode($target);
       $this->template = $template;
       $this->bot = new MediaWikiBot();
    }
 
   	public function post($data) {
-  		$params = array('modules' => 'protect');
-  		$this->myprintr($this->bot->help($params));
-  	}
+  		
+  		print_r ( $this->bot->login() );
 
+  		$params = array('titles' => $this->target,
+  						'bot' => "true",
+  						'prop' => "info|revisions",
+  						'rvprop' => "content",
+  						'intoken' => "edit");
+  		print_r ( $this->bot->query($params) );
+  		$oldPage = array_values(
+					  			array_values(
+					  				array_values(
+					  					array_values(
+					  						
+					  							$this->bot->query($params))[0])[0])[0])[3][0];
 
+  		$antrag = $this->template;
 
-  	// FOR DEBUGGING:
-  	function myprintr($array) {
-  		foreach ($array as $key => $value) {
-  			if(is_array($value)) {
-  				echo "[".$key."] => ".$this->myprintr($value)."<br>";
-  			} else {
-  				echo "[".$key."] => ".nl2br($value)."<br>";
-  			}
+  		foreach ($data as $key => $value) {
+  			$antrag = str_replace("%%".$key."%%", $value, $antrag);
   		}
+
+  		$antrag .= "\n\n<!--%%NEW%%-->\n";
+
+  		$newPage = str_replace("<!--%%NEW%%-->", $antrag, $oldPage);
+
+  		// push $new to wiki
+  		$params3 = array('title' => $this->target,
+  						'bot' => "true",
+  						'section' => "0",
+  						'summary' => urlencode("Neuer Antrag via Formular"),
+  						'text' => urlencode($newPage)
+  						);
+  		print_r ( $this->bot->edit($params3) );
   	}
 }
 

@@ -144,7 +144,9 @@ class MediaWikiBot {
 			$params['lgtoken'] = $results['login']['token'];
 		}
 		// get the data
+		print_r($params);
 		$data = $this->curl_post($url, $params);
+		print_r($data);
 		// return or set data
 		if ($data['login']['result'] != "Success") {
 			return $data;
@@ -194,7 +196,8 @@ class MediaWikiBot {
 		curl_setopt($ch, CURLOPT_TIMEOUT, 15);
 		curl_setopt($ch, CURLOPT_COOKIEFILE, COOKIES);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, COOKIES);
-		curl_setopt($ch, CURLOPT_POST, count($params));
+		curl_setopt($ch, CURLOPT_POST, true);
+		//curl_setopt($ch, CURLOPT_VERBOSE, true);
 		// choose multipart if necessary
 		if ($multipart)
 			// submit as multipart
@@ -204,6 +207,7 @@ class MediaWikiBot {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $this->urlize_params($params));
 		// execute the post
 		$results = curl_exec($ch);
+		print_r(curl_getinfo($ch));
 		// close the connection
 		curl_close($ch);
 		// return the unserialized results

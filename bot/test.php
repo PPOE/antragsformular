@@ -1,7 +1,7 @@
 <?
 	require_once('antragsbot.class.php');
 
-	$bot = new AntragsBot("Benutzer:AntragsBot/Test", "Vorlage:Stmk/AntragLV");
+	$bot = new AntragsBot("Benutzer:AntragsBot/Test", file_get_contents("../stmk/template.txt"));
 
 	$data = array("titel"=>"Ein Titel",
 					"bereich"=>"Ein bereich",
