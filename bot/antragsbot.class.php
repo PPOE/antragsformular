@@ -38,6 +38,8 @@ class AntragsBot {
 
 	  		$newPage = str_replace("<!--%%NEW%%-->", $antrag, $oldPage);
 
+	  		echo "updating page..";
+
 	  		return $page->setText($newPage);
 		}
 		catch ( Exception $e )
