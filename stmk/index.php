@@ -1,6 +1,5 @@
 <?php
-	require_once('../bot/mediawikibot.class.php');
-	require_once('../bot/config.php');
+	require_once('../bot/antragsbot.class.php');
 
 	$submitted = isset($_POST['submit']);
 
@@ -21,6 +20,12 @@
 		}
 		if(!isset($error)) {
 			// DO THE BOT MAGIC!
+
+			
+			$bot = new AntragsBot("Benutzer:AntragsBot/Test", "Vorlage:Stmk/AntragLV");
+
+			
+
 			echo "Antrag erfolgreich erstellt! ;-)";
 		}
 	} else {
