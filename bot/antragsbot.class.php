@@ -19,7 +19,7 @@ class AntragsBot {
   		try
 		{
 		    if ($this->bot->login(USERNAME,PASSWORD))
-		        echo 'user logged in .' ;
+		        echo 'user logged in!\n' ;
 		    else {
 		        $error = $this->bot->getError();
 		        print_r($error);
@@ -27,6 +27,8 @@ class AntragsBot {
 
 		    $page = $this->bot->getPage($this->target);
 		    $oldPage = $page->getText();
+
+		    echo $oldPage;
 
 		    $antrag = $this->template;
 
@@ -38,7 +40,7 @@ class AntragsBot {
 
 	  		$newPage = str_replace("<!--%%NEW%%-->", $antrag, $oldPage);
 
-	  		echo "updating page..";
+	  		echo "updating page..\n";
 
 	  		return $page->setText($newPage);
 		}

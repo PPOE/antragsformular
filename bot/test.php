@@ -10,6 +10,6 @@
 					"antragsbegruendung"=>"Eine antragsbegruendung",
 					"zeitpunkt"=>date("d. m. Y  H:i"));
 
-	echo "posted? ".$bot->post($data) ? "true" : "false";
+	echo "posted? \n".$bot->post($data) ? "true" : "false";
 
 ?>
