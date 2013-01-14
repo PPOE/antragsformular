@@ -53,5 +53,8 @@
         </table>
     </form>
     </fieldset>
+    <p>
+        Anträge landet derzeit in einer <a href="https://wiki.piratenpartei.at/wiki/Benutzer:AntragsBot/Test">provisorischen Antragssammlung</a>. Das Formular ist also noch nicht für den produktiven Einsatz gedacht!
+    </p>
 </body>
 </html>
