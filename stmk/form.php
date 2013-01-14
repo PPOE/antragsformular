@@ -33,9 +33,19 @@
         </td></tr>
         <tr><td>Antragsforderung:</td><td>
             <textarea rows="15" cols="80" name="antragsforderung"><?= $data['antragsforderung']; ?></textarea>
+        </td><td>
+            Das Ziel des Antrags möge in einem Satz erkenntlich sein, zB: <br/><br/>
+            „Die Geschäftsführung möge die Aufnahme von Max Muster und <br/>
+            Viola Vorschlag in die Partei bestätigen.“ <br/>
+            oder<br/>
+             „Die Geschäftsführung <br/>
+            möge die Ausgabe von € 100,00 für den Ankauf von <br/>
+            Informationsmaterial bewilligen.“
         </td></tr>
         <tr><td>Antragsbegr&uuml;ndung:</td><td>
             <textarea rows="15" cols="80" name="antragsbegruendung"><?= $data['antragsbegruendung']; ?></textarea>
+        </td><td>
+            Jedem Antrag hat eine Begründung zugrunde zu liegen.
         </td></tr>
         <tr><td>
                 <input type="submit" name="submit" value="Erstellen">
