@@ -83,13 +83,13 @@ class MediaWikiBot {
 		 *  Simply redeclare them after you have done a php require on the
 		 *  MediaWikiBot class.
 		 */
-		define('DOMAIN', 'http://example.com');
-		define('WIKI', '/wiki');
-		define('USERNAME', 'bot');
-		define('PASSWORD', 'password');
-		define('COOKIES', 'cookies.tmp');
-		define('USERAGENT', 'WikimediaBot Framework by JKH');
-		define('FORMAT', 'php');
+		// define('DOMAIN', 'http://example.com');
+		// define('WIKI', '/wiki');
+		// define('USERNAME', 'bot');
+		// define('PASSWORD', 'password');
+		// define('COOKIES', 'cookies.tmp');
+		// define('USERAGENT', 'WikimediaBot Framework by JKH');
+		// define('FORMAT', 'php');
 	}
 
 	/** Dynamic method server
@@ -102,7 +102,7 @@ class MediaWikiBot {
 		// get the params
 		$params = $args[0];
 		// check for multipart
-		$multipart = $args[1];
+		$multipart = isset($args[1]) ? $args[1] : null;
 		// check for valid method
 		if (in_array($method, $this->apimethods)) {
 			// get multipart info
@@ -148,7 +148,7 @@ class MediaWikiBot {
 		// return or set data
 		if ($data['login']['result'] != "Success") {
 			return $data;
-		}
+		} 
 	}
 
 	/** Standard processesing method
@@ -194,7 +194,7 @@ class MediaWikiBot {
 		curl_setopt($ch, CURLOPT_TIMEOUT, 15);
 		curl_setopt($ch, CURLOPT_COOKIEFILE, COOKIES);
 		curl_setopt($ch, CURLOPT_COOKIEJAR, COOKIES);
-		curl_setopt($ch, CURLOPT_POST, count($parms));
+		curl_setopt($ch, CURLOPT_POST, count($params));
 		// choose multipart if necessary
 		if ($multipart)
 			// submit as multipart
@@ -257,7 +257,7 @@ class MediaWikiBot {
 	/** Build a url string out of params
 	 */
 	private function urlize_params($params)
-	{
+	{	$urlstring = "";
 		// url-ify the data for POST
 		foreach ($params as $key => $value) {
 			$urlstring .= $key . '=' . $value . '&';
