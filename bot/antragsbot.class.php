@@ -13,26 +13,27 @@ class AntragsBot {
       $this->template = $template;
       $this->bot = new Wikimate(APIURL);
 
-      $this->bot->setDebugMode(true);
+      $this->bot->setDebugMode(false);
 
    }
 
   	public function post($data) {
   		
   		try
-		{
-		    if ($this->bot->login(USERNAME,PASSWORD))
+		{	
+			$loggedin = $this->bot->login(USERNAME,PASSWORD);
+		    /*if ($loggedin)
 		        echo "user logged in!\n" ;
 		    else {
 		        $error = $this->bot->getError();
 		        print_r($error);
-		    }
+		    }*/
 
 		    $page = $this->bot->getPage($this->target);
 		    $oldPage = $page->getText();
 
-		    if ( $page->exists() ) echo "seite existiert!\n";
-		    echo $oldPage."\n";
+		    //if ( $page->exists() ) echo "seite existiert!\n";
+		    //echo $oldPage."\n";
 
 		    $antrag = $this->template;
 
@@ -40,11 +41,11 @@ class AntragsBot {
 	  			$antrag = str_replace("%%".$key."%%", $value, $antrag);
 	  		}
 
-	  		$antrag .= "\n\n<!--%%NEW%%-->\n";
+	  		$antrag .= "\n<!--%%NEW%%-->\n";
 
 	  		$newPage = str_replace("<!--%%NEW%%-->", $antrag, $oldPage);
 
-	  		echo "updating page..\n";
+	  		//echo "updating page..\n";
 
 	  		return $page->setText($newPage);
 		}
