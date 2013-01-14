@@ -1,4 +1,4 @@
-{{Vorlage:Stmk/AntragLV
+{{Vorlage:Stmk/AntragLGF
 | titel = %%titel%%
 | bereich = %%bereich%%
 | antragsteller = %%antragsteller%%

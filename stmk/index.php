@@ -21,12 +21,16 @@
 		if(!isset($error)) {
 			// DO THE BOT MAGIC!
 
+			$data["zeitpunkt"] = date("d. m. Y  H:i");
 			
 			$bot = new AntragsBot("Benutzer:AntragsBot/Test", file_get_contents("template.txt"));
 
-			
-
-			echo "Antrag erfolgreich erstellt! ;-)";
+			if($bot->post($data)) {
+				echo "<strong>Antrag erfolgreich erstellt! </strong>;-)<br />";
+				echo "<a href='https://wiki.piratenpartei.at/wiki/Benutzer:AntragsBot/Test'>Zur provisorischen Antrags-Sammlung!</a>";
+			} else {
+				echo "Ein Fehler ist aufgetreten. Bitte kontaktiere einen Admin.";
+			}
 		}
 	} else {
 		foreach ($keys as $key) {
