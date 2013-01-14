@@ -12,6 +12,9 @@ class AntragsBot {
       $this->target = $target;
       $this->template = $template;
       $this->bot = new Wikimate(APIURL);
+
+      $this->bot->debugMode(true);
+
    }
 
   	public function post($data) {
@@ -19,7 +22,7 @@ class AntragsBot {
   		try
 		{
 		    if ($this->bot->login(USERNAME,PASSWORD))
-		        echo 'user logged in!\n' ;
+		        echo "user logged in!\n" ;
 		    else {
 		        $error = $this->bot->getError();
 		        print_r($error);
@@ -28,7 +31,8 @@ class AntragsBot {
 		    $page = $this->bot->getPage($this->target);
 		    $oldPage = $page->getText();
 
-		    echo $oldPage;
+		    if ( $page->exists() ) echo "seite existiert!\n";
+		    echo $oldPage."\n";
 
 		    $antrag = $this->template;
 
